@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma";
+import { prisma } from '../lib/prisma';
 
 export class SearchRepository {
   async logSearch(userId: string, query: string) {
@@ -10,7 +10,7 @@ export class SearchRepository {
   async getHistoryByUserId(userId: string) {
     return await prisma.searchHistory.findMany({
       where: { userId },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: 'desc' },
     });
   }
 }
