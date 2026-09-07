@@ -1,3 +1,4 @@
+import { ThemeToggleButton } from "@/components/theme-toggle-button";
 import Image from "next/image";
 
 export default function Home() {
@@ -62,6 +63,8 @@ export default function Home() {
           >
             Documentation
           </a>
+
+          <ThemeToggleButton />
         </div>
       </main>
     </div>
