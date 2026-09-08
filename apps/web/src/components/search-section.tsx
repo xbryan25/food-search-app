@@ -1,6 +1,7 @@
 import { IconSearch } from "@tabler/icons-react";
 
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/context/i18n-context";
 
 interface SearchSectionProps {
   searchQuery: string;
@@ -18,14 +19,15 @@ export function SearchSection({
   onClickClearResults,
   productsCount,
 }: SearchSectionProps) {
+  const { t } = useI18n();
+
   return (
     <section className="flex flex-col items-center text-center max-w-2xl mx-auto gap-3 pt-4 sm:pt-8">
       <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-        Search Food & Nutritional Data
+        {t("heroTitle")}
       </h1>
       <p className="text-sm sm:text-base text-muted-foreground">
-        Explore Open Food Facts dataset. Unlock instant macro insights,
-        Nutri-Score analysis, and ingredients breakdown.
+        {t("heroSubtitle")}
       </p>
 
       <div className="relative w-full mt-4">
@@ -35,7 +37,7 @@ export function SearchSection({
             type="text"
             value={searchQuery}
             onChange={(e) => onSetSearchQuery(e.target.value)}
-            placeholder="Search by product name, brand, or barcode..."
+            placeholder={t("searchPlaceholder")}
             className="w-full h-12 rounded-xl border border-input bg-card pl-11 pr-24 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 shadow-sm transition-all"
           />
           <div className="absolute right-2 flex items-center gap-1">
@@ -44,17 +46,17 @@ export function SearchSection({
               className="h-8 px-3 text-xs"
               onClick={onClickSearch}
             >
-              Search
+              {t("search")}
             </Button>
 
-            {productsCount > 0 && (
+            {searchQuery !== "" && (
               <Button
                 size="sm"
                 variant="destructive"
                 className="h-8 px-3 text-xs"
                 onClick={onClickClearResults}
               >
-                Clear results
+                {t("clear")}
               </Button>
             )}
           </div>

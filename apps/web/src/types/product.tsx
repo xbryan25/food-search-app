@@ -20,7 +20,7 @@ export interface Product {
   brand: string;
   category: string;
   image: string;
-  nutriscore: "A" | "B" | "C" | "D" | "E";
+  nutriscore: "A" | "B" | "C" | "D" | "E" | "UNKNOWN";
   nutrition: Nutrition;
 }
 

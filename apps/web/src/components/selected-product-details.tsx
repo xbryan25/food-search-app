@@ -3,6 +3,7 @@ import { IconBarcode } from "@tabler/icons-react";
 
 import { getNutriscoreBadgeColor } from "@/utils/get-nutriscore-badge-color";
 import { Product } from "@/types/product";
+import { useI18n } from "@/context/i18n-context";
 
 interface SelectedProductDetailsProps {
   selectedProduct: Product;
@@ -11,6 +12,8 @@ interface SelectedProductDetailsProps {
 export function SelectedProductDetails({
   selectedProduct,
 }: SelectedProductDetailsProps) {
+  const { t } = useI18n();
+
   return (
     <div className="flex flex-col sm:flex-row gap-6 items-start">
       <div className="relative h-40 w-40 rounded-xl bg-muted/40 border border-border shrink-0 p-2 flex items-center justify-center">
@@ -25,7 +28,7 @@ export function SelectedProductDetails({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-            <span className="text-xs">No image available</span>
+            <span className="text-xs text-center">{t("noImageAvailable")}</span>
           </div>
         )}
       </div>
@@ -40,7 +43,10 @@ export function SelectedProductDetails({
               selectedProduct.nutriscore,
             )}`}
           >
-            Nutri-Score {selectedProduct.nutriscore}
+            {t("nutriscore")}{" "}
+            {selectedProduct.nutriscore === "UNKNOWN"
+              ? t("unknownNutriscore")
+              : selectedProduct.nutriscore}
           </span>
         </div>
 
@@ -49,12 +55,13 @@ export function SelectedProductDetails({
         </h2>
 
         <p className="text-xs text-muted-foreground flex items-center gap-1">
-          <IconBarcode className="h-4 w-4" /> Barcode: {selectedProduct.id}
+          <IconBarcode className="h-4 w-4" /> {t("barcode")}:{" "}
+          {selectedProduct.id}
         </p>
 
         <div className="mt-2 flex flex-wrap gap-1.5">
           <span className="inline-flex items-center gap-1 rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-            Category: {selectedProduct.category || "Unknown"}
+            {t("category")}: {selectedProduct.category || "Unknown"}
           </span>
         </div>
       </div>

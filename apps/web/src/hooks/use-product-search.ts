@@ -45,5 +45,6 @@ export function useProductSearch(language: string = "EN") {
     hasSearched,
     search,
     setProducts,
+    setHasSearched,
   };
 }
