@@ -8,6 +8,7 @@ interface MainSectionProps {
   searchQuery: string;
   onSetSearchQuery: (searchQuery: string) => void;
   onClickSearch: () => void;
+  onClickClearResults: () => void;
   isProUser: boolean;
   onSetSelectedProduct: (product: Product | null) => void;
 
@@ -21,6 +22,7 @@ export function MainSection({
   searchQuery,
   onSetSearchQuery,
   onClickSearch,
+  onClickClearResults,
   isProUser,
   onSetSelectedProduct,
   products,
@@ -36,6 +38,8 @@ export function MainSection({
           onSetSearchQuery(searchQuery)
         }
         onClickSearch={onClickSearch}
+        onClickClearResults={onClickClearResults}
+        productsCount={products.length}
       />
 
       {isProductsLoading && (

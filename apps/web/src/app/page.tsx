@@ -22,10 +22,15 @@ export default function Home() {
     error: productsError,
     hasSearched,
     search,
+    setProducts,
   } = useProductSearch(selectedLanguage);
 
   const handleSearch = () => {
     search(searchQuery);
+  };
+
+  const clearResults = () => {
+    setProducts([]);
   };
 
   return (
@@ -43,6 +48,7 @@ export default function Home() {
         isProUser={isProUser}
         onSetSelectedProduct={setSelectedProduct}
         onClickSearch={handleSearch}
+        onClickClearResults={clearResults}
         products={products}
         isProductsLoading={isProductsLoading}
         hasSearched={hasSearched}

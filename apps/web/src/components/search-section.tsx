@@ -6,12 +6,17 @@ interface SearchSectionProps {
   searchQuery: string;
   onSetSearchQuery: (searchQuery: string) => void;
   onClickSearch: () => void;
+  onClickClearResults: () => void;
+
+  productsCount: number;
 }
 
 export function SearchSection({
   searchQuery,
   onSetSearchQuery,
   onClickSearch,
+  onClickClearResults,
+  productsCount,
 }: SearchSectionProps) {
   return (
     <section className="flex flex-col items-center text-center max-w-2xl mx-auto gap-3 pt-4 sm:pt-8">
@@ -42,13 +47,16 @@ export function SearchSection({
               Search
             </Button>
 
-            <Button
-              size="sm"
-              className="h-8 px-3 text-xs"
-              onClick={onClickSearch}
-            >
-              Clear results
-            </Button>
+            {productsCount > 0 && (
+              <Button
+                size="sm"
+                variant="destructive"
+                className="h-8 px-3 text-xs"
+                onClick={onClickClearResults}
+              >
+                Clear results
+              </Button>
+            )}
           </div>
         </div>
       </div>

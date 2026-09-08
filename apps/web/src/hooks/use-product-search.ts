@@ -44,5 +44,6 @@ export function useProductSearch(language: string = "EN") {
     error,
     hasSearched,
     search,
+    setProducts,
   };
 }
