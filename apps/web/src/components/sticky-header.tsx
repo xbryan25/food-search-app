@@ -6,6 +6,7 @@ import {
   IconCheck,
   IconPlant,
   IconSparkles,
+  IconMeat,
 } from "@tabler/icons-react";
 import { ThemeToggleButton } from "@/components/theme-toggle-button";
 import { Button } from "@/components/ui/button";
@@ -37,7 +38,7 @@ export function StickyHeader({
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold shadow-sm">
-            <IconPlant className="h-6 w-6" />
+            <IconMeat className="h-6 w-6" />
           </div>
           <div>
             <span className="text-lg font-bold tracking-tight">FoodSearch</span>
@@ -48,7 +49,6 @@ export function StickyHeader({
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Language Switcher Dropdown */}
           <div className="relative">
             <Button
               variant="ghost"
@@ -81,7 +81,6 @@ export function StickyHeader({
             )}
           </div>
 
-          {/* Pro Subscription Toggle */}
           <Button
             variant={isProUser ? "default" : "outline"}
             size="sm"
