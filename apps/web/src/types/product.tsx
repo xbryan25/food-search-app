@@ -1,3 +1,19 @@
+interface Ingredient {
+  ingredientCount: number;
+  unknownIngredientCount: number;
+}
+
+interface Nutrition {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  saturatedFat: number;
+  sugars: number;
+  salt: number;
+  ingredients: Ingredient;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -5,11 +21,10 @@ export interface Product {
   category: string;
   image: string;
   nutriscore: "A" | "B" | "C" | "D" | "E";
-  ingredients: string[];
-  macros: {
-    calories: number;
-    protein: number;
-    carbs: number;
-    fat: number;
-  };
+  nutrition: Nutrition;
+}
+
+export interface SearchResponse {
+  products: Product[];
+  total: number;
 }

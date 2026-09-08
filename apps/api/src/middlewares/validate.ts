@@ -32,8 +32,8 @@ export const searchSchema = z.object({
     .min(2, 'Search term must be at least 2 characters'),
 
   lang: z
-    .enum(['en', 'nl', 'de', 'fr'], {
-      message: 'Language must be one of: en, nl, de, fr',
+    .enum(['EN', 'NL', 'DE', 'FR'], {
+      message: 'Language must be one of: EN, NL, DE, FR',
     })
-    .default('en'),
+    .default('EN'),
 });

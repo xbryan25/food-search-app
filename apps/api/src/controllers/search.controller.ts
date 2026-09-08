@@ -20,10 +20,11 @@ export class SearchController {
         lang
       );
 
-      // Transform array through Resource
-      const formattedProducts = products.map(ProductResource);
+      const formattedProducts = products.map((product: unknown) =>
+        ProductResource(product, lang, true)
+      );
 
-      return res.json({ status: 'success', data: formattedProducts });
+      return res.json({ status: 'success', products: formattedProducts });
     } catch (error) {
       next(error);
     }

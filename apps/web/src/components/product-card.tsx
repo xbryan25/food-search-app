@@ -22,14 +22,20 @@ export function ProductCard({
       className="group relative flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
     >
       <div className="relative h-48 w-full bg-muted/30 p-4 flex items-center justify-center border-b border-border/50">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          unoptimized
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
-        />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+            <span className="text-xs">No image available</span>
+          </div>
+        )}
 
         <span
           className={`absolute top-3 left-3 px-2 py-0.5 text-xs font-black rounded-md shadow-xs ${getNutriscoreBadgeColor(

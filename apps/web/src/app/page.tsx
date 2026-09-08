@@ -8,12 +8,24 @@ import { MainSection } from "@/components/main-section";
 import { Product } from "@/types/product";
 
 import { useState } from "react";
+import { useProductSearch } from "@/hooks/use-product-search";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProUser, setIsProUser] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("EN");
+
+  const {
+    products,
+    isLoading: isProductsLoading,
+    error: productsError,
+    search,
+  } = useProductSearch(selectedLanguage);
+
+  const handleSearch = () => {
+    search(searchQuery);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
@@ -28,7 +40,11 @@ export default function Home() {
         searchQuery={searchQuery}
         onSetSearchQuery={(searchQuery) => setSearchQuery(searchQuery)}
         isProUser={isProUser}
-        onSetSelectedProduct={(product) => setSelectedProduct(product)}
+        onSetSelectedProduct={setSelectedProduct}
+        onClickSearch={handleSearch}
+        products={products}
+        isProductsLoading={isProductsLoading}
+        productsError={productsError}
       />
 
       {selectedProduct && (

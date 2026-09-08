@@ -14,12 +14,20 @@ export function SelectedProductDetails({
   return (
     <div className="flex flex-col sm:flex-row gap-6 items-start">
       <div className="relative h-40 w-40 rounded-xl bg-muted/40 border border-border shrink-0 p-2 flex items-center justify-center">
-        <Image
-          src={selectedProduct.image}
-          alt={selectedProduct.name}
-          fill
-          className="object-contain p-2"
-        />
+        {selectedProduct.image ? (
+          <Image
+            src={selectedProduct.image}
+            alt={selectedProduct.name}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
+            <span className="text-xs">No image available</span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-2 flex-1">
@@ -46,7 +54,7 @@ export function SelectedProductDetails({
 
         <div className="mt-2 flex flex-wrap gap-1.5">
           <span className="inline-flex items-center gap-1 rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-            Category: {selectedProduct.category}
+            Category: {selectedProduct.category || "Unknown"}
           </span>
         </div>
       </div>

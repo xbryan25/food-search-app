@@ -36,7 +36,7 @@ export function SelectedProductNutrition({
               Calories
             </span>
             <span className="text-lg font-bold">
-              {selectedProduct.macros.calories} kcal
+              {selectedProduct.nutrition.calories} kcal
             </span>
           </div>
           <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
@@ -44,7 +44,7 @@ export function SelectedProductNutrition({
               Protein
             </span>
             <span className="text-lg font-bold">
-              {selectedProduct.macros.protein}g
+              {selectedProduct.nutrition.protein}g
             </span>
           </div>
           <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
@@ -52,13 +52,13 @@ export function SelectedProductNutrition({
               Carbs
             </span>
             <span className="text-lg font-bold">
-              {selectedProduct.macros.carbs}g
+              {selectedProduct.nutrition.carbs}g
             </span>
           </div>
           <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
             <span className="text-[11px] text-muted-foreground block">Fat</span>
             <span className="text-lg font-bold">
-              {selectedProduct.macros.fat}g
+              {selectedProduct.nutrition.fat}g
             </span>
           </div>
         </div>

@@ -34,7 +34,7 @@ export function SelectedProduct({
 
         <SelectedProductDetails selectedProduct={selectedProduct} />
 
-        <div className="mt-6 border-t border-border pt-4">
+        {/* <div className="mt-6 border-t border-border pt-4">
           <h3 className="text-sm font-semibold mb-2 flex items-center gap-1.5">
             <IconInfoCircle className="h-4 w-4 text-primary" />
             Ingredients List
@@ -42,7 +42,7 @@ export function SelectedProduct({
           <p className="text-xs text-muted-foreground leading-relaxed bg-muted/30 p-3 rounded-lg border border-border/50">
             {selectedProduct.ingredients.join(", ")}
           </p>
-        </div>
+        </div> */}
 
         <SelectedProductNutrition
           isProUser={isProUser}

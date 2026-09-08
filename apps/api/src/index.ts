@@ -1,7 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
 import apiRoutes from './routes/search.route';
+import cors from 'cors';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
 app.use(express.json());
 
 // Register API routes with prefix
