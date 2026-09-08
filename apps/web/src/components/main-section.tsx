@@ -3,6 +3,7 @@ import { SearchSection } from "./search-section";
 import { ProductsGrid } from "./products-grid";
 import { Spinner } from "./ui/spinner";
 import { useState } from "react";
+import { useI18n } from "@/context/i18n-context";
 
 interface MainSectionProps {
   searchQuery: string;
@@ -30,6 +31,8 @@ export function MainSection({
   productsError,
   hasSearched,
 }: MainSectionProps) {
+  const { t } = useI18n();
+
   return (
     <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
       <SearchSection
@@ -45,9 +48,7 @@ export function MainSection({
       {isProductsLoading && (
         <div className="py-12 flex flex-col items-center w-full gap-1">
           <Spinner className="size-12  text-muted-foreground" />
-          <h4 className="text-muted-foreground text-sm">
-            Loading search results...
-          </h4>
+          <h4 className="text-muted-foreground text-sm">{t("loading")}</h4>
         </div>
       )}
 
@@ -61,14 +62,15 @@ export function MainSection({
         hasSearched &&
         !productsError &&
         products?.length === 0 && (
-          <div className="py-12 text-center text-muted-foreground">
-            <p className="text-sm">No products found matching your search.</p>
+          <div className="flex flex-col gap-1 py-12 text-center text-muted-foreground">
+            <p className="text-lg">{t("noResults")}</p>
+            <p className="text-xs">{t("noResultsSub")}</p>
           </div>
         )}
 
       {!hasSearched && (
         <div className="py-12 text-center text-muted-foreground">
-          <p className="text-sm">Search for food products by name.</p>
+          <p className="text-lg">{t("initialState")}</p>
         </div>
       )}
 
@@ -80,10 +82,10 @@ export function MainSection({
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div>
                 <h2 className="text-lg font-semibold tracking-tight">
-                  Search Results
+                  {t("searchResults")}
                 </h2>
                 <p className="text-xs text-muted-foreground">
-                  Showing {products.length} products
+                  {t("showingResults", { count: products.length })}
                 </p>
               </div>
             </div>

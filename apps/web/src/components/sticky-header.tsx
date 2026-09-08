@@ -4,34 +4,33 @@ import { useState } from "react";
 import {
   IconLanguage,
   IconCheck,
-  IconPlant,
   IconSparkles,
   IconMeat,
 } from "@tabler/icons-react";
 import { ThemeToggleButton } from "@/components/theme-toggle-button";
 import { Button } from "@/components/ui/button";
 
+import { useI18n } from "@/context/i18n-context";
+import { Language } from "@/i18n/dictionaries";
+
+import { cn } from "@/lib/utils";
+
 interface StickyHeaderProps {
   isProUser: boolean;
   onTogglePro: () => void;
-  selectedLanguage: string;
-  onLanguageChange: (langCode: string) => void;
 }
 
-export function StickyHeader({
-  isProUser,
-  onTogglePro,
-  selectedLanguage,
-  onLanguageChange,
-}: StickyHeaderProps) {
-  const languages = [
-    { code: "EN", name: "English" },
-    { code: "NL", name: "Nederlands" },
-    { code: "DE", name: "Deutsch" },
-    { code: "FR", name: "Français" },
-  ];
+const languages = [
+  { code: "EN", name: "English" },
+  { code: "NL", name: "Nederlands" },
+  { code: "DE", name: "Deutsch" },
+  { code: "FR", name: "Français" },
+];
 
+export function StickyHeader({ isProUser, onTogglePro }: StickyHeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+
+  const { language, setLanguage, t } = useI18n();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -57,7 +56,7 @@ export function StickyHeader({
               className="flex items-center gap-1.5 px-2.5 text-xs font-medium"
             >
               <IconLanguage className="h-4 w-4 text-muted-foreground" />
-              <span>{selectedLanguage}</span>
+              <span>{language}</span>
             </Button>
 
             {isLangMenuOpen && (
@@ -66,14 +65,19 @@ export function StickyHeader({
                   <button
                     key={lang.code}
                     onClick={() => {
-                      onLanguageChange(lang.code);
+                      setLanguage(lang.code as Language);
                       setIsLangMenuOpen(false);
                     }}
-                    className="flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-xs transition-colors hover:bg-muted"
+                    className={cn(
+                      "flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-xs transition-colors ",
+                      language === lang.code
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                    )}
                   >
                     <span>{lang.name}</span>
-                    {selectedLanguage === lang.code && (
-                      <IconCheck className="h-3.5 w-3.5 text-primary" />
+                    {language === lang.code && (
+                      <IconCheck className="h-3.5 w-3.5 text-accent" />
                     )}
                   </button>
                 ))}
@@ -88,7 +92,7 @@ export function StickyHeader({
             className="gap-1.5 text-xs font-medium"
           >
             <IconSparkles className="h-3.5 w-3.5 text-amber-500" />
-            <span>{isProUser ? "Pro Plan" : "Upgrade to Pro"}</span>
+            <span>{isProUser ? t("proPlan") : t("upgradeToPro")}</span>
           </Button>
 
           <ThemeToggleButton />

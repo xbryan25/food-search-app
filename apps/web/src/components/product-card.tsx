@@ -3,6 +3,7 @@ import { IconLock, IconChevronRight, IconBarcode } from "@tabler/icons-react";
 
 import { getNutriscoreBadgeColor } from "@/utils/get-nutriscore-badge-color";
 import { Product } from "@/types/product";
+import { useI18n } from "@/context/i18n-context";
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,8 @@ export function ProductCard({
   isProUser,
   onSetSelectedProduct,
 }: ProductCardProps) {
+  const { t } = useI18n();
+
   return (
     <div
       key={product.id}
@@ -33,7 +36,7 @@ export function ProductCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-            <span className="text-xs">No image available</span>
+            <span className="text-xs">{t("noImageAvailable")}</span>
           </div>
         )}
 
@@ -42,13 +45,15 @@ export function ProductCard({
             product.nutriscore,
           )}`}
         >
-          {product.nutriscore}
+          {product.nutriscore === "UNKNOWN"
+            ? t("unknownNutriscore")
+            : product.nutriscore}
         </span>
 
         {!isProUser && (
           <span className="absolute top-3 right-3 flex items-center gap-1 bg-background/80 backdrop-blur-xs text-foreground px-2 py-0.5 rounded-full text-[10px] font-medium border border-border shadow-xs">
             <IconLock className="h-3 w-3 text-amber-500" />
-            Macros Locked
+            {t("macrosLocked")}
           </span>
         )}
       </div>
@@ -69,7 +74,7 @@ export function ProductCard({
             {product.id}
           </span>
           <span className="flex items-center gap-0.5 text-primary font-medium group-hover:translate-x-0.5 transition-transform">
-            Details
+            {t("details")}
             <IconChevronRight className="h-3.5 w-3.5" />
           </span>
         </div>

@@ -73,11 +73,12 @@ export function ProductResource(
     nutrition: isSubscribed
       ? {
           calories: product.nutriments?.['energy-kcal_100g'] ?? null,
-          fat: product.nutriments?.['fat_100g'] ?? null,
-          saturatedFat: product.nutriments?.['saturated-fat_100g'] ?? null,
-          carbs: product.nutriments?.['carbohydrates_100g'] ?? null,
-          sugars: product.nutriments?.['sugars_100g'] ?? null,
           protein: product.nutriments?.['proteins_100g'] ?? null,
+          carbs: product.nutriments?.['carbohydrates_100g'] ?? null,
+          fat: product.nutriments?.['fat_100g'] ?? null,
+
+          saturatedFat: product.nutriments?.['saturated-fat_100g'] ?? null,
+          sugars: product.nutriments?.['sugars_100g'] ?? null,
           salt: product.nutriments?.['salt_100g'] ?? null,
 
           ingredients: {

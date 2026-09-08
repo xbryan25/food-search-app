@@ -9,12 +9,15 @@ import { Product } from "@/types/product";
 
 import { useState } from "react";
 import { useProductSearch } from "@/hooks/use-product-search";
+import { useI18n } from "@/context/i18n-context";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProUser, setIsProUser] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("EN");
+  // const [selectedLanguage, setSelectedLanguage] = useState("EN");
+
+  const { language } = useI18n();
 
   const {
     products,
@@ -23,7 +26,8 @@ export default function Home() {
     hasSearched,
     search,
     setProducts,
-  } = useProductSearch(selectedLanguage);
+    setHasSearched,
+  } = useProductSearch(language);
 
   const handleSearch = () => {
     search(searchQuery);
@@ -31,6 +35,9 @@ export default function Home() {
 
   const clearResults = () => {
     setProducts([]);
+    setHasSearched(false);
+
+    setSearchQuery("");
   };
 
   return (
@@ -38,8 +45,6 @@ export default function Home() {
       <StickyHeader
         isProUser={isProUser}
         onTogglePro={() => setIsProUser((prev) => !prev)}
-        selectedLanguage={selectedLanguage}
-        onLanguageChange={(langCode) => setSelectedLanguage(langCode)}
       />
 
       <MainSection
