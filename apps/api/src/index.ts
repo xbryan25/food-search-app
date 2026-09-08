@@ -1,21 +1,31 @@
-import express, { Request, Response, NextFunction } from "express";
-import apiRoutes from "./routes/search.route";
+import express, { Request, Response, NextFunction } from 'express';
+import apiRoutes from './routes/search.route';
+import cors from 'cors';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
 app.use(express.json());
 
 // Register API routes with prefix
-app.use("/api", apiRoutes);
+app.use('/api', apiRoutes);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error("❌ Uncaught Express Error:", err);
+  console.error('❌ Uncaught Express Error:', err);
 
   const statusCode = err.statusCode || err.status || 500;
   res.status(statusCode).json({
-    status: "error",
-    message: err.message || "Internal Server Error",
-    ...(process.env.NODE_ENV !== "production" && { stack: err.stack }),
+    status: 'error',
+    message: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV !== 'production' && { stack: err.stack }),
   });
 });
 
-app.listen(4000, () => console.log("🚀 Server running on port 4000"));
+app.listen(4000, () => console.log('🚀 Server running on port 4000'));
