@@ -7,6 +7,7 @@ import { api } from "@/lib/api";
 import { Product } from "@/types/product";
 
 export function useProductSearch(language: string = "EN") {
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +23,7 @@ export function useProductSearch(language: string = "EN") {
       setError(null);
 
       try {
+        setHasSearched(true);
         const data = await api.searchProducts(query, language);
         setProducts(data.products);
       } catch (err) {
@@ -40,6 +42,7 @@ export function useProductSearch(language: string = "EN") {
     products,
     isLoading,
     error,
+    hasSearched,
     search,
   };
 }

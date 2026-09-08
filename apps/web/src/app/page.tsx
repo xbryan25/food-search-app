@@ -20,6 +20,7 @@ export default function Home() {
     products,
     isLoading: isProductsLoading,
     error: productsError,
+    hasSearched,
     search,
   } = useProductSearch(selectedLanguage);
 
@@ -44,6 +45,7 @@ export default function Home() {
         onClickSearch={handleSearch}
         products={products}
         isProductsLoading={isProductsLoading}
+        hasSearched={hasSearched}
         productsError={productsError}
       />
 
