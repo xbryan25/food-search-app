@@ -2,8 +2,12 @@ export type Language = "EN" | "NL" | "DE" | "FR";
 
 export const dictionaries = {
   EN: {
+    toastSuccess: "Welcome to Pro! Your subscription is active.",
+    toastCanceled: "Checkout was canceled. No charges were made.",
+
     proPlan: "Pro Plan",
     upgradeToPro: "Upgrade to Pro",
+    checkoutLoading: "Redirecting to checkout...",
 
     // Hero & Header Section
     heroTitle: "Search Food & Nutritional Data",
@@ -62,8 +66,13 @@ export const dictionaries = {
   },
 
   NL: {
+    toastSuccess: "Welkom bij Pro! Je abonnement is actief.",
+    toastCanceled:
+      "Afrekenen is geannuleerd. Er zijn geen kosten in rekening gebracht.",
+
     proPlan: "Pro-abonnement",
     upgradeToPro: "Upgraden naar Pro",
+    checkoutLoading: "Doorsturen naar afrekenen...",
 
     // Hero & Header Section
     heroTitle: "Zoek Voedings- & Voedingswaardegegevens",
@@ -123,8 +132,12 @@ export const dictionaries = {
   },
 
   DE: {
+    toastSuccess: "Willkommen bei Pro! Ihr Abonnement ist aktiv.",
+    toastCanceled: "Kaufvorgang abgebrochen. Es wurden keine Gebühren erhoben.",
+
     proPlan: "Pro-Tarif",
     upgradeToPro: "Auf Pro upgraden",
+    checkoutLoading: "Weiterleitung zur Kasse...",
 
     // Hero & Header Section
     heroTitle: "Lebensmittel- & Nährwertdaten Suchen",
@@ -186,8 +199,12 @@ export const dictionaries = {
   },
 
   FR: {
+    toastSuccess: "Bienvenue dans Pro ! Votre abonnement est actif.",
+    toastCanceled: "Paiement annulé. Aucun frais n'a été prélevé.",
+
     proPlan: "Forfait Pro",
     upgradeToPro: "Passer à la version Pro",
+    checkoutLoading: "Redirection vers le paiement...",
 
     // Hero & Header Section
     heroTitle: "Rechercher des Données Nutritionnelles",

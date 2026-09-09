@@ -3,19 +3,20 @@ import { IconLock, IconSparkles, IconFlame } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/product";
 import { useI18n } from "@/context/i18n-context";
+import { useCheckout } from "@/hooks/use-checkout";
 
 interface SelectedProductNutritionProps {
   isProUser: boolean;
-  onTogglePro: () => void;
   selectedProduct: Product;
 }
 
 export function SelectedProductNutrition({
   isProUser,
-  onTogglePro,
   selectedProduct,
 }: SelectedProductNutritionProps) {
   const roundMaxTwo = (num: number) => Number(Math.fround(num).toFixed(2));
+
+  const { checkout, isLoading: isCheckoutLoading } = useCheckout();
 
   const { t } = useI18n();
 
@@ -112,11 +113,15 @@ export function SelectedProductNutrition({
             </p>
             <Button
               size="sm"
-              onClick={() => onTogglePro()}
+              onClick={async () => {
+                await checkout();
+              }}
               className="gap-1.5 text-xs bg-amber-600 hover:bg-amber-700 text-white"
             >
               <IconSparkles className="h-3.5 w-3.5" />
-              {t("unlockProAccess")}
+              {isCheckoutLoading
+                ? t("checkoutLoading") || "Redirecting..."
+                : t("unlockProAccess")}
             </Button>
           </div>
         </div>

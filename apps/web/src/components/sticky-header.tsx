@@ -10,6 +10,8 @@ import {
 import { ThemeToggleButton } from "@/components/theme-toggle-button";
 import { Button } from "@/components/ui/button";
 
+import { useCheckout } from "@/hooks/use-checkout";
+
 import { useI18n } from "@/context/i18n-context";
 import { Language } from "@/i18n/dictionaries";
 
@@ -17,7 +19,6 @@ import { cn } from "@/lib/utils";
 
 interface StickyHeaderProps {
   isProUser: boolean;
-  onTogglePro: () => void;
 }
 
 const languages = [
@@ -27,10 +28,12 @@ const languages = [
   { code: "FR", name: "Français" },
 ];
 
-export function StickyHeader({ isProUser, onTogglePro }: StickyHeaderProps) {
+export function StickyHeader({ isProUser }: StickyHeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   const { language, setLanguage, t } = useI18n();
+
+  const { checkout, isLoading: isCheckoutLoading } = useCheckout();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -85,15 +88,39 @@ export function StickyHeader({ isProUser, onTogglePro }: StickyHeaderProps) {
             )}
           </div>
 
-          <Button
-            variant={isProUser ? "default" : "outline"}
-            size="sm"
-            onClick={onTogglePro}
-            className="gap-1.5 text-xs font-medium"
-          >
-            <IconSparkles className="h-3.5 w-3.5 text-amber-500" />
-            <span>{isProUser ? t("proPlan") : t("upgradeToPro")}</span>
-          </Button>
+          {isProUser ? (
+            <div
+              className={cn(
+                "inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-medium border border-transparent transition-all",
+                "bg-emerald-600 text-white shadow-sm select-none cursor-default",
+              )}
+            >
+              <IconSparkles className="h-3.5 w-3.5 text-amber-300" />
+              <span>{t("proPlan")}</span>
+            </div>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={isCheckoutLoading}
+              onClick={async () => {
+                await checkout();
+              }}
+              className="gap-1.5 text-xs font-medium transition-all"
+            >
+              <IconSparkles
+                className={cn(
+                  "h-3.5 w-3.5 text-amber-500",
+                  isCheckoutLoading && "animate-spin",
+                )}
+              />
+              <span>
+                {isCheckoutLoading
+                  ? t("checkoutLoading") || "Redirecting..."
+                  : t("upgradeToPro")}
+              </span>
+            </Button>
+          )}
 
           <ThemeToggleButton />
         </div>
