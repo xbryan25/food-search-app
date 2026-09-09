@@ -6,10 +6,8 @@ import { isSubscribedPolicy } from '../middlewares/policy';
 const router = Router();
 const searchController = new SearchController();
 
-router.get('/hello', searchController.hello);
-
 router.get(
-  '/search',
+  '/',
   isSubscribedPolicy,
   validateSearch(searchSchema),
   searchController.index

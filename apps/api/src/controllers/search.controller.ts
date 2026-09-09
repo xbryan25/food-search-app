@@ -6,10 +6,6 @@ import { SearchQueryParams } from '../middlewares/validate';
 export class SearchController {
   private searchService = new SearchService();
 
-  hello = async (req: Request, res: Response) => {
-    return res.json({ message: 'Hello World!' });
-  };
-
   index = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { query, lang } = req.query as unknown as SearchQueryParams;
