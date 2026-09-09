@@ -7,6 +7,7 @@ dotenv.config({ path: envPath });
 import express, { Request, Response, NextFunction } from 'express';
 import searchRoutes from './routes/search.route';
 import subscriptionRoutes from './routes/subscribe.route';
+import userRoutes from './routes/user.route';
 import cors from 'cors';
 import Stripe from 'stripe';
 
@@ -64,6 +65,7 @@ app.use(express.json());
 // Register API routes with prefix
 app.use('/api/search', searchRoutes);
 app.use('/api/subscribe', subscriptionRoutes);
+app.use('/api/user', userRoutes);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error('Uncaught Express Error:', err);

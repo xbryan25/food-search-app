@@ -1,4 +1,6 @@
 import { Product, SearchResponse } from "@/types/product";
+import { CheckoutResponse } from "@/types/stripe";
+import { User } from "@/types/user";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,4 +35,11 @@ export const api = {
 
   getProductById: (id: string, lang: string = "EN") =>
     fetcher<Product>(`/products/${id}?lang=${lang}`),
+
+  getUser: () => fetcher<User>("/user/me"),
+
+  createCheckoutSession: () =>
+    fetcher<CheckoutResponse>("/subscribe/create-checkout-session", {
+      method: "POST",
+    }),
 };

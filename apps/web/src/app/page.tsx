@@ -10,12 +10,13 @@ import { Product } from "@/types/product";
 import { useState } from "react";
 import { useProductSearch } from "@/hooks/use-product-search";
 import { useI18n } from "@/context/i18n-context";
+import { useUser } from "@/hooks/use-user";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isProUser, setIsProUser] = useState(false);
-  // const [selectedLanguage, setSelectedLanguage] = useState("EN");
+
+  const { isSubscribed: isProUser } = useUser();
 
   const { language } = useI18n();
 
@@ -42,10 +43,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
-      <StickyHeader
-        isProUser={isProUser}
-        onTogglePro={() => setIsProUser((prev) => !prev)}
-      />
+      <StickyHeader isProUser={isProUser} />
 
       <MainSection
         searchQuery={searchQuery}
@@ -63,7 +61,6 @@ export default function Home() {
       {selectedProduct && (
         <SelectedProduct
           isProUser={isProUser}
-          onTogglePro={() => setIsProUser((prev) => !prev)}
           selectedProduct={selectedProduct}
           onSetSelectedProduct={(product) => setSelectedProduct(product)}
         />
