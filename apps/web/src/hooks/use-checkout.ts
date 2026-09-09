@@ -1,11 +1,22 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { api } from "@/lib/api";
 
 export function useCheckout() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        setIsLoading(false);
+      }
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
 
   const checkout = useCallback(async () => {
     setIsLoading(true);
@@ -23,7 +34,7 @@ export function useCheckout() {
       const message =
         err instanceof Error ? err.message : "Failed to initiate checkout";
       setError(message);
-    } finally {
+
       setIsLoading(false);
     }
   }, []);

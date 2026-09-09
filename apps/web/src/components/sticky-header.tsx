@@ -116,7 +116,7 @@ export function StickyHeader({ isProUser }: StickyHeaderProps) {
               />
               <span>
                 {isCheckoutLoading
-                  ? t("loading") || "Redirecting..."
+                  ? t("checkoutLoading") || "Redirecting..."
                   : t("upgradeToPro")}
               </span>
             </Button>

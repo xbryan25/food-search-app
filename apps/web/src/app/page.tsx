@@ -7,16 +7,17 @@ import { MainSection } from "@/components/main-section";
 
 import { Product } from "@/types/product";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useProductSearch } from "@/hooks/use-product-search";
 import { useI18n } from "@/context/i18n-context";
 import { useUser } from "@/hooks/use-user";
+import { CheckoutToastListener } from "@/components/checkout-toast-listener";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const { isSubscribed: isProUser } = useUser();
+  const { isSubscribed: isProUser, refetchUser } = useUser();
 
   const { language } = useI18n();
 
@@ -43,6 +44,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
+      <Suspense fallback={null}>
+        <CheckoutToastListener refetchUser={refetchUser} />
+      </Suspense>
+
       <StickyHeader isProUser={isProUser} />
 
       <MainSection

@@ -120,7 +120,7 @@ export function SelectedProductNutrition({
             >
               <IconSparkles className="h-3.5 w-3.5" />
               {isCheckoutLoading
-                ? t("loading") || "Redirecting..."
+                ? t("checkoutLoading") || "Redirecting..."
                 : t("unlockProAccess")}
             </Button>
           </div>
