@@ -78,4 +78,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(4000, () => console.log('🚀 Server running on port 4000'));
+app.listen(process.env.PORT! || 4000, () =>
+  console.log(`Server running on port ${process.env.PORT! || 4000}`)
+);
